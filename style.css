@@ -37,7 +37,6 @@ input:hover{
 }
 .show{
     cursor: pointer;
-    position: absolute;
-    right: 468px;
-    bottom: 357px;
+    position: relative;
+    left:-3.875rem;
 }
