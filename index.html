@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Password Checker</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">Password Checker</div>
+      <form action="/">
+        <input type="password" onkeyup="run()" placeholder="Enter a password" />
+        <span class="show"></span>
+        
+        <div class="message"></div>
+      </form>
+    </div>
+
+    <script>
+      const input = document.querySelector("input");
+      const message = document.querySelector(".message");
+      const show = document.querySelector(".show");
+
+      let WeakPassword = /[a-z]/;
+      let MediumPassword = /\d+/;
+      let StrongPassword = /.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
+
+      function run() {
+        if (input.value !== "") {
+            show.textContent="SHOW"
+          if (
+            input.value.length <= 3 &&
+            (input.value.match(WeakPassword) ||
+              input.value.match(MediumPassword) ||
+              input.value.match(StrongPassword))
+          ) {
+            message.textContent = "Your password is too weak";
+            message.style.color="red"
+          } else if (
+            input.value.length > 3 &&
+            input.value.match(WeakPassword) &&
+            input.value.match(MediumPassword)
+          ) {
+            message.textContent = "Your password is medium";
+            message.style.color="orange"
+          }
+          if (
+            input.value.length > 8 &&
+            input.value.match(WeakPassword) &&
+            input.value.match(MediumPassword) &&
+            input.value.match(StrongPassword)
+          ) {
+            message.textContent = "Your password is strong";
+            message.style.color="green"
+          }
+          show.onclick=function(){
+            console.log("Hello")
+            if (input.type=="password") {
+                input.type="text";
+                show.textContent="HIDE"
+                show.style.color="red"
+
+            }
+            else{
+                input.type="password"
+                show.textContent="SHOW"
+                show.style.color="black"
+
+        }
+          }
+        }
+        else{
+            show.textContent="";
+            message.textContent=""
+        }
+        
+        
+      }
+    </script>
+  </body>
+</html>
